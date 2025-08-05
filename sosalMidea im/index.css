@@ -1,0 +1,407 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'poppins', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+input {
+    background-color: transparent;
+}
+
+body {
+    background-color: #efefef;
+
+}
+
+img {
+    background-color: transparent;
+}
+a{
+  text-transform: capitalize;  
+}
+
+ /* nav ber */
+
+nav {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1876f2;
+    padding:  0px 45px ;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
+}
+
+.nav-left .nav-logo {
+
+    width: 120px;
+    height: 35px;
+    margin-right: 15px;
+
+}
+
+.nav-left,
+.nav-left ul {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+
+}
+
+.nav-left ul  {
+    transform: translateY(15%);
+    gap: 15px;
+  
+}
+.se{
+    padding: 0px 4px;
+}
+.nav-right,
+.nav-right form {
+    display: flex;
+    justify-self: end;
+    gap: 10px;
+    align-items: center;
+}
+
+.nav-right form {
+
+    background-color: #efefef;
+    border-radius: 50px;
+    padding: 5px;
+    border-radius: 20px;
+   
+}
+
+.nav-right img , .online , .online img{
+
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    
+}
+.online{
+    position: relative;
+    border-radius: 50%;
+}
+.online::after{
+    content: "";
+    background-color: rgb(0, 0, 255);
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    border: 1px solid #efefef;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+
+
+}
+
+/* contuner  */
+.contuner{
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 45px;
+}
+
+.contuner .left-siderber{
+    flex-basis: 25%;
+    position: sticky;
+    top: 35px;
+    align-self: flex-start;
+    
+}
+.contuner .mein-content{
+    flex-basis : calc(50% - 30px);
+   
+}
+.contuner .right-siderber{
+  
+    flex-basis: 25%;
+    position: sticky;
+    top: 35PX;
+    align-self: flex-start;
+    color: #626266;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    overflow: hidden;
+   
+}
+.imp-links{
+    border-bottom: 1px solid #b8bbbe ;
+    
+}
+.imp-links , .imp-links a , .Shortcuts-links{
+    display: flex;
+    flex-direction: column;
+    gap: 10px 10px;
+    margin-bottom: 20px;
+    width: fit-content;
+    
+}
+.imp-links a  , .Shortcuts-links a{
+    flex-direction: row;
+    font-size: 0.7em;
+    color: #626266;
+}
+.imp-links a i {
+   color: #1876f2;
+   
+}
+.imp-links a:nth-last-child(1){
+
+    font-size: 12px;
+    color: #1876f2;
+   
+}
+.Shortcuts-links a img{
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+}
+.Shortcuts-links a {
+    display: flex;
+    align-items: center;
+    gap:  10px;
+    font-size: 0.9em;
+}.Shortcuts-links p{
+    color: #626266;
+}
+
+/* .siderber-title */
+
+.siderber-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}.siderber-title h4{
+    font-weight: 600;
+    font-size: 14px;
+}.siderber-title a{
+    color: #1876f2;
+    font-size: 12px;
+}
+
+.event{
+    display: flex;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.event .left-event{
+    height: 65px;
+    border-radius: 10px;
+    width: 65px;
+    margin-right: 15px;
+    padding-top: 10px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.event .right-event{
+
+}
+.event p{
+    font-size: 12px;
+}
+.event a{
+    font-size: 12px;
+    color: #1876f2;
+}.event .left-event span{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    background-color:#1876f2 ;
+    color: #fff;
+    font-size: 10px;
+    padding: 4px 0px;
+}
+
+.siderber-ads{
+
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    height: 100px;
+}
+
+
+.online-list{
+ 
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+.online-list .online::after , p{
+    top: unset;
+    bottom: 0px;
+    font-size: 12px;
+
+}
+
+
+.story-gallely{
+
+    display: flex;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+
+.story{
+    flex-basis: 20%;
+    padding-top: 120px;
+    position: relative;
+    background: linear-gradient(transparent , rgba(0,0,0,0.5)) , url(https://media.istockphoto.com/id/1534040386/photo/an-outdoor-bamboo-gazebo-nestled-amidst-lush-greenery-offering-serene-relaxation-after-a.webp?b=1&s=612x612&w=0&k=20&c=vuWY9Cw4TjBDhJLyMVL20Qm5gddDNQ3UmHATP_s2Xvw=);
+    border-radius: 4px;
+    background-position: center;
+    background-size: cover;
+
+}
+.story img {
+    width: 100%;
+    height: 100%;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.story i{
+    padding: 4px;
+    background-color: #1876f2;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    position: absolute;
+    bottom: 27px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+}
+
+.story p{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 10px;
+}
+
+.write-post-contuner{
+    width: 100%;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 15px;
+    color: #626262;
+    display: flex;
+    align-items: center;
+}
+.write-post-contuner small {
+  font-size: 10px;
+
+}
+.write-post-contuner small i{
+    margin-left: 5px;
+}
+.user-profile img{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+
+.post-input{
+    padding: 55px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    background-color: #fff;
+    border-radius: 0px 0px 6px 6px;
+}
+.post-input textarea{
+    width: 100%;
+    border: 0px;
+    border-bottom:1px solid #ccc ;
+    background-color: transparent;
+    resize: none;
+}
+
+.poet-links{
+    display: flex;
+
+}.poet-links a{
+    margin-right: 20px;
+    font-size: 13px;
+    color: #626262;
+}.poet-links a i{
+    margin-right: 7px;
+    color: #1876f2;
+}
+
+.post-contuners{
+    background-color: #fff;
+    padding: 20px ;
+    width: 100%;
+    border-radius: 6px;
+    margin: 20px 0px;
+    display: grid;
+    grid-template-columns: 40px 1fr 1fr;
+    grid-row-gap: 10px;
+
+}
+.post-contuners .date{
+    color: #626262;
+    font-size: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+}.post-contuners p span{
+    padding: 0px;
+    color: black;
+    font-weight: 700;
+
+    
+
+}.post-contuners p{
+    line-height: 20px;
+    grid-column: 1 / -1;
+}
+.post-contuners p a{
+    color: #1876f2;
+
+}.post-contuners p img{
+    width: 100%;
+    height: 250px;
+}
+.scti-icon{
+    grid-column: 1/ -1;
+    display: grid;
+    grid-template-columns: auto auto auto 1fr;
+
+}.scti-icon img{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    justify-self: end;
+}
+.lood{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
