@@ -1,270 +1,1390 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>socarmidea</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .timer-warning {
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.7;
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 
-<body>
-
-    <nav>
-        <div class="nav-left">
-            <img src="https://static.vecteezy.com/system/resources/thumbnails/022/721/714/small/youtube-logo-for-popular-online-media-content-creation-website-and-application-free-png.png"
-                class="nav-logo" alt="">
-            <ul>
-                <li><i class="fa-solid fa-bell"></i></li>
-                <li><i class="fa-solid fa-envelope"></i></li>
-                <li><i class="fa-solid fa-video"></i></li>
-            </ul>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+  <!-- Navigation Header -->
+  <nav class="bg-white shadow-sm border-b sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <div class="flex-shrink-0 flex items-center">
+            <svg class="h-8 w-8 text-indigo-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-xl font-bold text-gray-900">MCQ Platform v5</span>
+          </div>
         </div>
-        <div class="nav-right">
-            <form action="">
-                <i class="fa-solid fa-magnifying-glass se"></i>
-                <input type="search" name="" placeholder="Search" id="">
-            </form>
 
-            <div class="online">
-                <img src="data:image/jpeg;base64,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"
-                    alt="">
-            </div>
+        <!-- Navigation Menu -->
+        <div class="hidden md:flex items-center space-x-6">
+          <button id="nav-home"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            🏠 Home
+          </button>
+          <button id="nav-leaderboard"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            🏆 Leaderboard
+          </button>
+          <button id="nav-dashboard"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+            style="display: none;">
+            📊 Dashboard
+          </button>
         </div>
-    </nav>
 
-    <div class="contuner">
-        <!-- left siderber -->
-        <div class="left-siderber">
-            <div class="imp-links">
-                <a href=""> <i class="fa-solid fa-pen-nib"></i>Latest News</a>
-                <a href=""> <i class="fa-solid fa-user-group"></i>friends</a>
-                <a href=""> <i class="fa-solid fa-people-group"></i>group</a>
-                <a href=""> <i class="fa-solid fa-cart-shopping"></i>MarketPlace</a>
-                <a href=""> <i class="fa-solid fa-video"></i>Watch</a>
-                <a href=""> See More</a>
-            </div>
-            <div class="Shortcuts-links">
-                <p>Your Shortcuts</p>
-                <a href=""><img
-                        src="https://media.istockphoto.com/id/1283021188/photo/adapting-a-brand-strategy-to-suit-her-companys-target-market.jpg?s=612x612&w=0&k=20&c=t75XtvpO3_pbjxuXc9m3fW28f5sIYEufw87Vmm6tDqc=">
-                    web Develoopars</a>
-                <a href=""><img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqFls9484ZwFPz7n4ijFNRoXwyLU63VDAy5g&s">
-                    web Desgin </a>
-                <a href=""><img
-                        src="https://media.istockphoto.com/id/1371339413/photo/co-working-team-meeting-concept-businessman-using-smart-phone-and-digital-tablet-and-laptop.jpg?s=612x612&w=0&k=20&c=ysEsVw3q2axYt3oVZAuQjtHRlN3lY-U_e0ikK5yKIXQ=">
-                    Full Stik Developars</a>
-                <a href=""><img
-                        src="https://media.istockphoto.com/id/1224339524/photo/responsive-devices-on-home-desktop-showing-web-design-website.jpg?s=612x612&w=0&k=20&c=O67WUlZ8840MYw-2SqWWJYw2iMhqVys-mGt_-an8fvo=">
-                    website Experts</a>
-
-            </div>
+        <!-- User Info / Auth Buttons -->
+        <div class="flex items-center space-x-4" id="nav-buttons">
+          <div class="hidden md:flex items-center space-x-2" id="user-stats" style="display: none;">
+            <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full font-medium" id="user-xp">0
+              XP</span>
+            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium" id="user-streak">0
+              🔥</span>
+          </div>
+          <span class="text-sm text-gray-600" id="user-greeting" style="display: none;">Welcome back!</span>
+          <button id="login-nav-btn"
+            class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            Login
+          </button>
+          <button id="signup-nav-btn"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+            Sign Up
+          </button>
+          <button id="logout-btn"
+            class="text-red-600 hover:text-red-700 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+            style="display: none;">
+            Logout
+          </button>
         </div>
-        <!-- mein-content -->
-        <div class="mein-content">
-            <div class="story-gallely">
-                <div class="story">
-                    <i class="fa-solid fa-plus"></i>
-                    <p>Post Story</p>
-                </div>
-                <div class="story">
-                    <img
-                        src="https://media.istockphoto.com/id/1224339524/photo/responsive-devices-on-home-desktop-showing-web-design-website.jpg?s=612x612&w=0&k=20&c=O67WUlZ8840MYw-2SqWWJYw2iMhqVys-mGt_-an8fvo=">
-                    <p>Post Story</p>
-                </div>
-                <div class="story">
-                  <img
-                        src="https://media.istockphoto.com/id/1371339413/photo/co-working-team-meeting-concept-businessman-using-smart-phone-and-digital-tablet-and-laptop.jpg?s=612x612&w=0&k=20&c=ysEsVw3q2axYt3oVZAuQjtHRlN3lY-U_e0ikK5yKIXQ=">
-                    <p>Post Story</p>
-                </div>
-                <div class="story">
-                    <img
-                        src="https://media.istockphoto.com/id/1224339524/photo/responsive-devices-on-home-desktop-showing-web-design-website.jpg?s=612x612&w=0&k=20&c=O67WUlZ8840MYw-2SqWWJYw2iMhqVys-mGt_-an8fvo=">
-                    <p>Post Story</p>
-                </div>
-                <div class="story">
-                    <img
-                        src="https://media.istockphoto.com/id/1224339524/photo/responsive-devices-on-home-desktop-showing-web-design-website.jpg?s=612x612&w=0&k=20&c=O67WUlZ8840MYw-2SqWWJYw2iMhqVys-mGt_-an8fvo=">
-                    <p>Post Story</p>
-                </div>
+      </div>
+    </div>
+  </nav>
 
-            </div>
+   <!-- Main Content Container -->
+  <div class="container mx-auto px-4 py-8">
 
-            <div class="write-post-contuner">
-                <div class="user-profile">
-                    <img
-                        src="https://media.istockphoto.com/id/1224339524/photo/responsive-devices-on-home-desktop-showing-web-design-website.jpg?s=612x612&w=0&k=20&c=O67WUlZ8840MYw-2SqWWJYw2iMhqVys-mGt_-an8fvo=">
-                </div>
-                <div class="">
-                    <p>iqbal hossen</p>
-                    <small>pubilc<i class="fa-solid fa-caret-down"></i></small>
-                </div>
-            </div>
-
-
-            <div class="post-input">
-                <textarea rows="3" placeholder="What is on your mind iqbal?"></textarea>
-                <div class="poet-links">
-                    <a href=""><i class="fa-solid fa-bell i"></i>Live bideo</a>
-                    <a href=""><i class="fa-solid fa-bell i"></i>Potos/bideo</a>
-                    <a href=""><i class="fa-solid fa-bell i"></i>Felinks/active</a>
-                </div>
-            </div>
-
-
-            <div class="post-contuners">
-                <div class="user-profile">
-                    <img
-                        src="https://media.istockphoto.com/id/1224339524/photo/responsive-devices-on-home-desktop-showing-web-design-website.jpg?s=612x612&w=0&k=20&c=O67WUlZ8840MYw-2SqWWJYw2iMhqVys-mGt_-an8fvo=">
-                </div>
-                <div class="">
-                    <p>iqbal hossen</p>
-                    <span class="date">june.40/05/ 07:07 pm</span>
-                   
-                </div>
-                <p>Lorem ipsum dolor, <span>loremeqwe</span> ipsum dolor, sit ametLorem ipsum dolor, sit ametL orem ipsum
-                    dolor, sit amet <a href="">#iqbal hossen</a> 
-                    <a href="">#iqbal hossen</a> 
-                    <img
-                    src="https://media.istockphoto.com/id/1371339413/photo/co-working-team-meeting-concept-businessman-using-smart-phone-and-digital-tablet-and-laptop.jpg?s=612x612&w=0&k=20&c=ysEsVw3q2axYt3oVZAuQjtHRlN3lY-U_e0ikK5yKIXQ=">
-                   
-                </p>
-                <div class="poet-links scti-icon">
-                    <a href=""><i class="fa-solid fa-bell i"></i>Live bideo</a>
-                    <a href=""><i class="fa-solid fa-bell i"></i>Potos/bideo</a>
-                    <a href=""><i class="fa-solid fa-bell i"></i>Felinks/active</a>
-                   <img
-                    src="https://media.istockphoto.com/id/1224339524/photo/responsive-devices-on-home-desktop-showing-web-design-website.jpg?s=612x612&w=0&k=20&c=O67WUlZ8840MYw-2SqWWJYw2iMhqVys-mGt_-an8fvo=">
-                </div>
-            </div>
-            <div class="post-contuners">
-                <div class="user-profile">
-                    <img
-                        src="https://media.istockphoto.com/id/1224339524/photo/responsive-devices-on-home-desktop-showing-web-design-website.jpg?s=612x612&w=0&k=20&c=O67WUlZ8840MYw-2SqWWJYw2iMhqVys-mGt_-an8fvo=">
-                </div>
-                <div class="">
-                    <p>iqbal hossen</p>
-                    <span class="date">june.40/05/ 07:07 pm</span>
-                   
-                </div>
-                <p>Lorem ipsum dolor, <span>loremeqwe</span> ipsum dolor, sit ametLorem ipsum dolor, sit ametL orem ipsum
-                    dolor, sit amet <a href="">#iqbal hossen</a> 
-                    <a href="">#iqbal hossen</a> 
-                    <img
-                    src="https://media.istockphoto.com/id/1224339524/photo/responsive-devices-on-home-desktop-showing-web-design-website.jpg?s=612x612&w=0&k=20&c=O67WUlZ8840MYw-2SqWWJYw2iMhqVys-mGt_-an8fvo=">
-                   
-                </p>
-                <div class="poet-links scti-icon">
-                    <a href=""><i class="fa-solid fa-bell i"></i>Live bideo</a>
-                    <a href=""><i class="fa-solid fa-bell i"></i>Potos/bideo</a>
-                    <a href=""><i class="fa-solid fa-bell i"></i>Felinks/active</a>
-                   <img
-                    src="https://media.istockphoto.com/id/1224339524/photo/responsive-devices-on-home-desktop-showing-web-design-website.jpg?s=612x612&w=0&k=20&c=O67WUlZ8840MYw-2SqWWJYw2iMhqVys-mGt_-an8fvo=">
-                </div>
-            </div>
-            <div class="post-contuners">
-                <div class="user-profile">
-                    <img
-                        src="https://media.istockphoto.com/id/1224339524/photo/responsive-devices-on-home-desktop-showing-web-design-website.jpg?s=612x612&w=0&k=20&c=O67WUlZ8840MYw-2SqWWJYw2iMhqVys-mGt_-an8fvo=">
-                </div>
-                <div class="">
-                    <p>iqbal hossen</p>
-                    <span class="date">june.40/05/ 07:07 pm</span>
-                   
-                </div>
-                <p>Lorem ipsum dolor, <span>loremeqwe</span> ipsum dolor, sit ametLorem ipsum dolor, sit ametL orem ipsum
-                    dolor, sit amet <a href="">#iqbal hossen</a> 
-                    <a href="">#iqbal hossen</a> 
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqFls9484ZwFPz7n4ijFNRoXwyLU63VDAy5g&s">
-                   
-                </p>
-                <div class="poet-links scti-icon">
-                    <a href=""><i class="fa-solid fa-bell i"></i>Live bideo</a>
-                    <a href=""><i class="fa-solid fa-bell i"></i>Potos/bideo</a>
-                    <a href=""><i class="fa-solid fa-bell i"></i>Felinks/active</a>
-                   <img
-                    src="https://media.istockphoto.com/id/1224339524/photo/responsive-devices-on-home-desktop-showing-web-design-website.jpg?s=612x612&w=0&k=20&c=O67WUlZ8840MYw-2SqWWJYw2iMhqVys-mGt_-an8fvo=">
-                </div>
-            </div>
-
-            <div class="lood">
-                <p>letme Mord</p>
-            </div>
+    <!-- Welcome/Landing Page -->
+    <div id="welcome-page" class="max-w-6xl mx-auto">
+      <div class="text-center mb-8">
+        <div class="gradient-bg rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+          <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" clip-rule="evenodd"></path>
+          </svg>
         </div>
-        <!-- right-siderber -->
-        <div class="right-siderber">
-            <div class="siderber-title">
-                <h4>Events</h4>
-                <a href="">See All</a>
-            </div>
-            <div class="event">
-                <div class="left-event">
-                    <h3>18</h3>
-                    <span>March</span>
-                </div>
-                <div class="right-event">
-                    <h4>Social Media</h4>
-                    <p><i class="fa-solid fa-location-dot"> </i> Willson Tech park </p>
-                    <a href="">More Info</a>
-                </div>
-            </div>
-            <div class="event">
-                <div class="left-event">
-                    <h3>22</h3>
-                    <span>June</span>
-                </div>
-                <div class="right-event">
-                    <h4>Mobile Marketig</h4>
-                    <p><i class="fa-solid fa-location-dot"> </i> Willson Tech park </p>
-                    <a href="">More Info</a>
-                </div>
-            </div>
+        <h1 class="text-5xl font-bold text-gray-800 mb-4">Advanced Quiz Platform v5</h1>
+        <p class="text-xl text-gray-600 mb-8">Experience the ultimate learning platform with timed quizzes,
+          leaderboards, and advanced analytics!</p>
+      </div>
 
-            <div class="siderber-title">
-                <h4>Sdvertisment</h4>
-                <a href="">Close</a>
+      <div class="grid lg:grid-cols-2 gap-8 mb-8">
+        <!-- Features Showcase -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">🚀 New in Version 5</h3>
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <span class="text-2xl mr-3">⏱️</span>
+              <div>
+                <div class="font-semibold">Timed Challenges</div>
+                <div class="text-sm text-gray-600">30-second countdown per question</div>
+              </div>
             </div>
-
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5Ks5SJdpFnEB4fhELhlSbDIYHk12XvPFhxw&s"
-                class="siderber-ads">
-            <div class="siderber-title">
-                <h4>Conversation</h4>
-                <a href="">Hide Chat</a>
+            <div class="flex items-center">
+              <span class="text-2xl mr-3">🏆</span>
+              <div>
+                <div class="font-semibold">Global Leaderboard</div>
+                <div class="text-sm text-gray-600">Compete with players worldwide</div>
+              </div>
             </div>
-
-            <div class="online-list">
-                <div class="online">
-                    <img src="data:image/jpeg;base64,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"
-                        alt="">
-                </div>
-                <p>Iqbal Hossen</p>
+            <div class="flex items-center">
+              <span class="text-2xl mr-3">📊</span>
+              <div>
+                <div class="font-semibold">Advanced Analytics</div>
+                <div class="text-sm text-gray-600">Detailed performance insights</div>
+              </div>
             </div>
-            <div class="online-list">
-                <div class="online">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQY9OL38FHPKucWTlkXqHdwd4__RhbYgEOIw&s"
-                        alt="">
-                </div>
-                <p>Iqbal Hossen</p>
+            <div class="flex items-center">
+              <span class="text-2xl mr-3">🎯</span>
+              <div>
+                <div class="font-semibold">Difficulty Levels</div>
+                <div class="text-sm text-gray-600">Easy, Medium, and Hard questions</div>
+              </div>
             </div>
-            <div class="online-list">
-                <div class="online onlineD">
-                    <img src="https://img.freepik.com/free-photo/man-with-thumb-up_1368-3701.jpg" alt="">
-                </div>
-                <p>Iqbal Hossen</p>
-            </div>
-
-
-
-
-
+          </div>
         </div>
+
+        <!-- Quick Stats -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">📈 Platform Stats</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="text-center p-4 bg-blue-50 rounded-lg">
+              <div class="text-2xl font-bold text-blue-600">15</div>
+              <div class="text-sm text-gray-600">Total Questions</div>
+            </div>
+            <div class="text-center p-4 bg-green-50 rounded-lg">
+              <div class="text-2xl font-bold text-green-600">3</div>
+              <div class="text-sm text-gray-600">Categories</div>
+            </div>
+            <div class="text-center p-4 bg-purple-50 rounded-lg">
+              <div class="text-2xl font-bold text-purple-600">3</div>
+              <div class="text-sm text-gray-600">Difficulty Levels</div>
+            </div>
+            <div class="text-center p-4 bg-yellow-50 rounded-lg">
+              <div class="text-2xl font-bold text-yellow-600" id="total-players">0</div>
+              <div class="text-sm text-gray-600">Active Players</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quiz Categories with Difficulty -->
+      <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Choose Your Challenge</h3>
+
+        <!-- Difficulty Selector -->
+        <div class="flex justify-center mb-6">
+          <div class="bg-gray-100 p-1 rounded-lg">
+            <button
+              class="difficulty-btn px-4 py-2 rounded-md text-sm font-medium transition-colors bg-white text-gray-900 shadow-sm"
+              data-difficulty="easy">
+              🟢 Easy (1x points)
+            </button>
+            <button
+              class="difficulty-btn px-4 py-2 rounded-md text-sm font-medium transition-colors text-gray-600 hover:text-gray-900"
+              data-difficulty="medium">
+              🟡 Medium (2x points)
+            </button>
+            <button
+              class="difficulty-btn px-4 py-2 rounded-md text-sm font-medium transition-colors text-gray-600 hover:text-gray-900"
+              data-difficulty="hard">
+              🔴 Hard (3x points)
+            </button>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6" id="category-selection">
+          <button
+            class="category-btn bg-blue-50 border-2 border-blue-200 p-6 rounded-lg hover:bg-blue-100 transition-all transform hover:scale-105"
+            data-category="general">
+            <div class="text-4xl mb-3">🧠</div>
+            <div class="font-bold text-gray-800 text-lg">General Knowledge</div>
+            <div class="text-sm text-gray-600 mt-2">History, Geography, Culture</div>
+            <div class="text-xs text-blue-600 mt-2 font-medium">5 Questions per difficulty</div>
+          </button>
+          <button
+            class="category-btn bg-green-50 border-2 border-green-200 p-6 rounded-lg hover:bg-green-100 transition-all transform hover:scale-105"
+            data-category="science">
+            <div class="text-4xl mb-3">🔬</div>
+            <div class="font-bold text-gray-800 text-lg">Science & Tech</div>
+            <div class="text-sm text-gray-600 mt-2">Physics, Chemistry, Biology</div>
+            <div class="text-xs text-green-600 mt-2 font-medium">5 Questions per difficulty</div>
+          </button>
+          <button
+            class="category-btn bg-purple-50 border-2 border-purple-200 p-6 rounded-lg hover:bg-purple-100 transition-all transform hover:scale-105"
+            data-category="math">
+            <div class="text-4xl mb-3">📊</div>
+            <div class="font-bold text-gray-800 text-lg">Mathematics</div>
+            <div class="text-sm text-gray-600 mt-2">Algebra, Geometry, Statistics</div>
+            <div class="text-xs text-purple-600 mt-2 font-medium">5 Questions per difficulty</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="text-center space-y-4">
+        <button id="start-quiz-guest"
+          class="px-8 py-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all transform hover:scale-105 font-bold text-lg shadow-lg">
+          🚀 Start Timed Quiz
+        </button>
+        <div class="space-x-4">
+          <button id="welcome-login-btn"
+            class="px-6 py-3 border-2 border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors font-medium">
+            Login to Save Progress
+          </button>
+          <button id="welcome-signup-btn"
+            class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors font-medium">
+            Create Account
+          </button>
+        </div>
+      </div>
     </div>
 
+    <!-- Leaderboard Page -->
+    <div id="leaderboard-page" class="max-w-4xl mx-auto hidden">
+      <div class="bg-white rounded-lg shadow-md p-8">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-2">🏆 Global Leaderboard</h2>
+          <p class="text-gray-600">Top performers across all categories and difficulties</p>
+        </div>
+
+        <div class="space-y-4" id="leaderboard-list">
+          <!-- Leaderboard entries will be populated by JavaScript -->
+        </div>
+
+        <div class="text-center mt-8">
+          <button id="back-to-home-from-leaderboard"
+            class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
+            Back to Home
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Dashboard -->
+    <div id="dashboard-page" class="max-w-6xl mx-auto hidden">
+      <div class="mb-8">
+        <h2 class="text-3xl font-bold text-gray-800 mb-2">📊 Your Dashboard</h2>
+        <p class="text-gray-600">Track your progress and performance analytics</p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6 mb-8">
+        <!-- User Stats -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Your Stats</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between">
+              <span class="text-gray-600">Total XP:</span>
+              <span class="font-bold text-yellow-600" id="dashboard-xp">0</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Current Streak:</span>
+              <span class="font-bold text-orange-600" id="dashboard-streak">0 🔥</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Quizzes Taken:</span>
+              <span class="font-bold text-blue-600" id="dashboard-quizzes">0</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Best Score:</span>
+              <span class="font-bold text-green-600" id="dashboard-best">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Achievements -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Recent Achievements</h3>
+          <div id="recent-achievements" class="space-y-2">
+            <div class="text-gray-500 text-sm">No achievements yet</div>
+          </div>
+        </div>
+
+        <!-- Category Performance -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-xl font-bold text-gray-800 mb-4">Category Performance</h3>
+          <div class="space-y-3" id="category-performance">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Quiz History -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Quiz History</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b">
+                <th class="text-left py-2">Date</th>
+                <th class="text-left py-2">Category</th>
+                <th class="text-left py-2">Difficulty</th>
+                <th class="text-left py-2">Score</th>
+                <th class="text-left py-2">XP Earned</th>
+              </tr>
+            </thead>
+            <tbody id="quiz-history">
+              <tr>
+                <td colspan="5" class="text-center py-4 text-gray-500">No quiz history yet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <button id="back-to-home-from-dashboard"
+          class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
+          Back to Home
+        </button>
+      </div>
+    </div>
+
+    <!-- Login Form -->
+    <div id="login-page" class="max-w-md mx-auto hidden">
+      <div class="bg-white rounded-lg shadow-md p-8">
+        <div class="text-center mb-8">
+          <div class="gradient-bg rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <h2 class="text-3xl font-bold text-gray-900">Login to Platform</h2>
+          <p class="mt-2 text-sm text-gray-600">Access your dashboard and save progress</p>
+        </div>
+
+        <form id="login-form" class="space-y-6">
+          <div>
+            <label for="login-email" class="block text-sm font-medium text-gray-700 mb-2">Email address</label>
+            <input id="login-email" type="email" required
+              class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Enter your email">
+          </div>
+
+          <div>
+            <label for="login-password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <input id="login-password" type="password" required
+              class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Enter your password">
+          </div>
+
+          <button type="submit"
+            class="w-full py-3 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium">
+            Sign In
+          </button>
+
+          <div class="text-center">
+            <span class="text-sm text-gray-600">Don't have an account? </span>
+            <button type="button" id="switch-to-signup" class="font-medium text-indigo-600 hover:text-indigo-500">Sign
+              up here</button>
+          </div>
+
+          <div class="text-center">
+            <button type="button" id="back-to-welcome-from-login" class="text-sm text-gray-500 hover:text-gray-700">←
+              Back to Home</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- Signup Form -->
+    <div id="signup-page" class="max-w-md mx-auto hidden">
+      <div class="bg-white rounded-lg shadow-md p-8">
+        <div class="text-center mb-8">
+          <div class="gradient-bg rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
+              </path>
+            </svg>
+          </div>
+          <h2 class="text-3xl font-bold text-gray-900">Join the Platform</h2>
+          <p class="mt-2 text-sm text-gray-600">Create your account and start learning!</p>
+        </div>
+
+        <form id="signup-form" class="space-y-6" enctype="multipart/form-data">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="first-name" class="block text-sm font-medium text-gray-700 mb-2">First name</label>
+              <input id="first-name" type="text" required
+                class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="First name">
+            </div>
+            <div>
+              <label for="last-name" class="block text-sm font-medium text-gray-700 mb-2">Last name</label>
+              <input id="last-name" type="text" required
+                class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="Last name">
+            </div>
+          </div>
+
+          <!-- Profile Image Upload -->
+          <div>
+            <label for="profile-image" class="block text-sm font-medium text-gray-700 mb-2">Profile Picture</label>
+            <input id="profile-image" type="file" accept="image/*"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+          </div>
+
+          <div>
+            <label for="signup-email" class="block text-sm font-medium text-gray-700 mb-2">Email address</label>
+            <input id="signup-email" type="email" required
+              class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Enter your email">
+          </div>
+
+          <div>
+            <label for="signup-password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <input id="signup-password" type="password" required
+              class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Create a password">
+          </div>
+
+          <button type="submit"
+            class="w-full py-3 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium">
+            Create Account
+          </button>
+
+          <div class="text-center">
+            <span class="text-sm text-gray-600">Already have an account? </span>
+            <button type="button" id="switch-to-login" class="font-medium text-indigo-600 hover:text-indigo-500">Sign in
+              here</button>
+          </div>
+
+          <div class="text-center">
+            <button type="button" id="back-to-welcome-from-signup" class="text-sm text-gray-500 hover:text-gray-700">←
+              Back to Home</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quiz-section" class="max-w-4xl mx-auto hidden">
+      <!-- Quiz Header with Timer -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center">
+            <span class="text-2xl mr-3" id="quiz-category-icon">🧠</span>
+            <div>
+              <h2 class="text-xl font-bold text-gray-800" id="quiz-category-name">General Knowledge</h2>
+              <p class="text-sm text-gray-600">
+                <span id="quiz-difficulty-name">Easy</span> •
+                <span id="quiz-points-info">1x points</span>
+              </p>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-2xl font-bold text-gray-800" id="timer-display">30</div>
+            <div class="text-xs text-gray-600">seconds left</div>
+          </div>
+        </div>
+
+        <!-- Timer Bar -->
+        <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+          <div class="bg-green-500 h-2 rounded-full transition-all duration-1000" id="timer-bar" style="width: 100%">
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-sm font-medium text-gray-600">Progress</span>
+          <span class="text-sm font-medium text-gray-600" id="progress-text">1 of 5</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+          <div class="bg-blue-600 h-2 rounded-full transition-all duration-300" id="progress-bar" style="width: 20%">
+          </div>
+        </div>
+      </div>
+
+      <!-- Question Card -->
+      <div class="bg-white rounded-lg shadow-md p-8 mb-6 fade-in" id="question-card">
+        <div class="mb-6">
+          <span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full mb-4">Question
+            1</span>
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4" id="question-text">What is the capital of France?</h2>
+        </div>
+
+        <div class="space-y-3" id="options-container">
+          <!-- Options will be populated by JavaScript -->
+        </div>
+
+        <div class="mt-6 flex justify-between items-center">
+          <button id="prev-btn"
+            class="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled>
+            ← Previous
+          </button>
+          <div class="flex items-center space-x-4">
+            <div class="text-sm text-gray-600">
+              Streak: <span class="font-bold text-orange-600" id="current-streak">0</span> 🔥
+            </div>
+            <button id="next-btn"
+              class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled>
+              Next →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Card -->
+      <div class="bg-white rounded-lg shadow-md p-8 text-center hidden fade-in" id="results-card">
+        <div class="mb-6">
+          <div class="text-6xl mb-4" id="results-emoji">🎉</div>
+          <h2 class="text-3xl font-bold text-gray-800 mb-2">Quiz Complete!</h2>
+          <p class="text-gray-600">
+            You completed the <span id="results-category-name">General Knowledge</span> quiz
+            on <span id="results-difficulty-name">Easy</span> difficulty
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <!-- Score Card -->
+          <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg p-6">
+            <div class="text-3xl font-bold mb-2" id="final-score">4/5</div>
+            <div class="text-lg mb-2" id="final-percentage">80%</div>
+            <div class="text-sm opacity-90" id="performance-message">Great job!</div>
+          </div>
+
+          <!-- XP and Stats -->
+          <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-lg p-6">
+            <div class="text-3xl font-bold mb-2" id="xp-earned">+120 XP</div>
+            <div class="text-lg mb-2">Experience Points</div>
+            <div class="text-sm opacity-90">
+              Base: <span id="base-xp">100</span> + Time Bonus: <span id="time-bonus-xp">20</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-4 gap-4 mb-6">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-green-600" id="correct-count">4</div>
+            <div class="text-sm text-gray-600">Correct</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-red-600" id="incorrect-count">1</div>
+            <div class="text-sm text-gray-600">Incorrect</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-orange-600" id="final-streak">3</div>
+            <div class="text-sm text-gray-600">Max Streak</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-blue-600" id="avg-time">15s</div>
+            <div class="text-sm text-gray-600">Avg Time</div>
+          </div>
+        </div>
+
+        <!-- Achievement Badge -->
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6" id="achievement-badge">
+          <div class="text-2xl mb-2">🏆</div>
+          <div class="font-semibold text-gray-800" id="achievement-title">Quiz Master!</div>
+          <div class="text-sm text-gray-600" id="achievement-description">You scored above 80%</div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex flex-wrap justify-center gap-3">
+            <button id="restart-btn"
+              class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium">
+              🔄 Retake Quiz
+            </button>
+            <button id="try-different-category"
+              class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 font-medium">
+              📚 Try Different Category
+            </button>
+            <button id="view-leaderboard"
+              class="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-200 font-medium">
+              🏆 View Leaderboard
+            </button>
+            <button id="back-to-home"
+              class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200 font-medium">
+              🏠 Back to Home
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Enhanced quiz data with difficulty levels
+    const quizCategories = {
+      general: {
+        name: "General Knowledge",
+        icon: "🧠",
+        color: "blue",
+        questions: {
+          easy: [
+            { question: "What is the capital of France?", options: ["London", "Berlin", "Paris", "Madrid"], correct: 2 },
+            { question: "Which planet is known as the Red Planet?", options: ["Venus", "Mars", "Jupiter", "Saturn"], correct: 1 },
+            { question: "What is the largest ocean on Earth?", options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"], correct: 3 },
+            { question: "Who wrote 'Romeo and Juliet'?", options: ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"], correct: 1 },
+            { question: "What year did World War II end?", options: ["1944", "1945", "1946", "1947"], correct: 1 }
+          ],
+          medium: [
+            { question: "Which country has the most time zones?", options: ["Russia", "USA", "China", "France"], correct: 3 },
+            { question: "What is the smallest country in the world?", options: ["Monaco", "Vatican City", "San Marino", "Liechtenstein"], correct: 1 },
+            { question: "Which ancient wonder of the world was located in Alexandria?", options: ["Hanging Gardens", "Lighthouse", "Colossus", "Mausoleum"], correct: 1 },
+            { question: "What is the currency of Japan?", options: ["Yuan", "Won", "Yen", "Ringgit"], correct: 2 },
+            { question: "Which river is the longest in the world?", options: ["Amazon", "Nile", "Yangtze", "Mississippi"], correct: 1 }
+          ],
+          hard: [
+            { question: "What is the capital of Bhutan?", options: ["Thimphu", "Paro", "Punakha", "Jakar"], correct: 0 },
+            { question: "Which element has the atomic number 79?", options: ["Silver", "Platinum", "Gold", "Mercury"], correct: 2 },
+            { question: "In which year was the Berlin Wall built?", options: ["1959", "1961", "1963", "1965"], correct: 1 },
+            { question: "What is the deepest point in Earth's oceans?", options: ["Puerto Rico Trench", "Java Trench", "Mariana Trench", "Peru-Chile Trench"], correct: 2 },
+            { question: "Which composer wrote 'The Four Seasons'?", options: ["Bach", "Vivaldi", "Mozart", "Beethoven"], correct: 1 }
+          ]
+        }
+      },
+      science: {
+        name: "Science & Technology",
+        icon: "🔬",
+        color: "green",
+        questions: {
+          easy: [
+            { question: "What is the chemical symbol for water?", options: ["H2O", "CO2", "NaCl", "O2"], correct: 0 },
+            { question: "How many bones are in the human body?", options: ["206", "208", "210", "212"], correct: 0 },
+            { question: "Which gas makes up most of Earth's atmosphere?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"], correct: 2 },
+            { question: "What is the speed of light?", options: ["299,792,458 m/s", "300,000,000 m/s", "299,000,000 m/s", "301,000,000 m/s"], correct: 0 },
+            { question: "What does DNA stand for?", options: ["Deoxyribonucleic Acid", "Dynamic Nuclear Acid", "Dual Nucleic Acid", "Direct Nuclear Acid"], correct: 0 }
+          ],
+          medium: [
+            { question: "What is the pH of pure water?", options: ["6", "7", "8", "9"], correct: 1 },
+            { question: "Which particle has no electric charge?", options: ["Proton", "Electron", "Neutron", "Positron"], correct: 2 },
+            { question: "What is the hardest natural substance?", options: ["Quartz", "Diamond", "Graphite", "Titanium"], correct: 1 },
+            { question: "How many chambers does a human heart have?", options: ["2", "3", "4", "5"], correct: 2 },
+            { question: "What is the chemical formula for methane?", options: ["CH4", "C2H6", "C3H8", "C4H10"], correct: 0 }
+          ],
+          hard: [
+            { question: "What is the Heisenberg Uncertainty Principle?", options: ["Energy conservation", "Position-momentum uncertainty", "Wave-particle duality", "Quantum entanglement"], correct: 1 },
+            { question: "Which enzyme breaks down starch?", options: ["Pepsin", "Trypsin", "Amylase", "Lipase"], correct: 2 },
+            { question: "What is the half-life of Carbon-14?", options: ["5,730 years", "1,600 years", "12,000 years", "50,000 years"], correct: 0 },
+            { question: "Which programming language was created by Guido van Rossum?", options: ["Java", "Python", "C++", "JavaScript"], correct: 1 },
+            { question: "What is the molecular weight of glucose (C6H12O6)?", options: ["180 g/mol", "160 g/mol", "200 g/mol", "220 g/mol"], correct: 0 }
+          ]
+        }
+      },
+      math: {
+        name: "Mathematics",
+        icon: "📊",
+        color: "purple",
+        questions: {
+          easy: [
+            { question: "What is 15% of 200?", options: ["25", "30", "35", "40"], correct: 1 },
+            { question: "What is the value of π (pi) to 2 decimal places?", options: ["3.14", "3.15", "3.16", "3.13"], correct: 0 },
+            { question: "If x + 5 = 12, what is x?", options: ["6", "7", "8", "9"], correct: 1 },
+            { question: "What is 8²?", options: ["16", "32", "64", "128"], correct: 2 },
+            { question: "What is the square root of 144?", options: ["11", "12", "13", "14"], correct: 1 }
+          ],
+          medium: [
+            { question: "What is the derivative of x³?", options: ["3x²", "x²", "3x", "x³"], correct: 0 },
+            { question: "What is log₁₀(1000)?", options: ["2", "3", "4", "5"], correct: 1 },
+            { question: "What is the area of a circle with radius 5?", options: ["25π", "10π", "15π", "20π"], correct: 0 },
+            { question: "What is the sum of angles in a triangle?", options: ["90°", "180°", "270°", "360°"], correct: 1 },
+            { question: "What is 7! (7 factorial)?", options: ["5040", "720", "840", "1260"], correct: 0 }
+          ],
+          hard: [
+            { question: "What is the integral of e^x dx?", options: ["e^x + C", "xe^x + C", "e^(x+1) + C", "ln(x) + C"], correct: 0 },
+            { question: "What is the limit of (sin x)/x as x approaches 0?", options: ["0", "1", "∞", "undefined"], correct: 1 },
+            { question: "What is the determinant of [[2,3],[1,4]]?", options: ["5", "8", "11", "14"], correct: 0 },
+            { question: "What is the Fibonacci sequence's golden ratio?", options: ["1.618", "1.414", "2.718", "3.141"], correct: 0 },
+            { question: "What is ∫₀¹ x² dx?", options: ["1/3", "1/2", "2/3", "1"], correct: 0 }
+          ]
+        }
+      }
+    };
+
+    // Application state
+    let currentUser = null;
+    let currentCategory = 'general';
+    let currentDifficulty = 'easy';
+    let currentQuestion = 0;
+    let userAnswers = [];
+    let selectedOption = null;
+    let currentPage = 'welcome';
+    let quizData = [];
+    let timer = null;
+    let timeLeft = 30;
+    let questionStartTime = 0;
+    let questionTimes = [];
+    let currentStreak = 0;
+    let maxStreak = 0;
+    let totalXP = 0;
+    let leaderboard = [];
+    let userStats = {
+      totalQuizzes: 0,
+      bestScore: 0,
+      totalXP: 0,
+      currentStreak: 0,
+      achievements: [],
+      quizHistory: [],
+      categoryStats: {}
+    };
+
+    // Page elements
+    const welcomePage = document.getElementById('welcome-page');
+    const loginPage = document.getElementById('login-page');
+    const signupPage = document.getElementById('signup-page');
+    const quizSection = document.getElementById('quiz-section');
+    const leaderboardPage = document.getElementById('leaderboard-page');
+    const dashboardPage = document.getElementById('dashboard-page');
+    const questionCard = document.getElementById('question-card');
+    const resultsCard = document.getElementById('results-card');
+
+    // Initialize application
+    function initApp() {
+      loadUserData();
+      updateLeaderboard();
+      updateTotalPlayers();
+      selectCategory('general');
+      selectDifficulty('easy');
+      showPage('welcome');
+    }
+
+    // Local storage functions
+    function saveUserData() {
+      if (currentUser) {
+        localStorage.setItem(`quiz_user_${currentUser.email}`, JSON.stringify(userStats));
+      }
+      localStorage.setItem('quiz_leaderboard', JSON.stringify(leaderboard));
+    }
+
+    function loadUserData() {
+      const savedLeaderboard = localStorage.getItem('quiz_leaderboard');
+      if (savedLeaderboard) {
+        leaderboard = JSON.parse(savedLeaderboard);
+      }
+    }
+
+    function loadUserStats() {
+      if (currentUser) {
+        const savedStats = localStorage.getItem(`quiz_user_${currentUser.email}`);
+        if (savedStats) {
+          userStats = JSON.parse(savedStats);
+        } else {
+          userStats = {
+            totalQuizzes: 0,
+            bestScore: 0,
+            totalXP: 0,
+            currentStreak: 0,
+            achievements: [],
+            quizHistory: [],
+            categoryStats: {}
+          };
+        }
+        updateUserDisplay();
+      }
+    }
+
+    // Navigation functions
+    function showPage(page) {
+      // Hide all pages
+      welcomePage.classList.add('hidden');
+      loginPage.classList.add('hidden');
+      signupPage.classList.add('hidden');
+      quizSection.classList.add('hidden');
+      leaderboardPage.classList.add('hidden');
+      dashboardPage.classList.add('hidden');
+
+      // Show requested page
+      currentPage = page;
+      switch (page) {
+        case 'welcome':
+          welcomePage.classList.remove('hidden');
+          break;
+        case 'login':
+          loginPage.classList.remove('hidden');
+          break;
+        case 'signup':
+          signupPage.classList.remove('hidden');
+          break;
+        case 'quiz':
+          quizSection.classList.remove('hidden');
+          initQuiz();
+          break;
+        case 'leaderboard':
+          leaderboardPage.classList.remove('hidden');
+          displayLeaderboard();
+          break;
+        case 'dashboard':
+          dashboardPage.classList.remove('hidden');
+          displayDashboard();
+          break;
+      }
+    }
+
+    // User authentication
+    function loginUser(email, name) {
+      currentUser = { email, name };
+      document.getElementById('user-greeting').textContent = `Welcome, ${name}!`;
+      document.getElementById('user-greeting').style.display = 'inline';
+      document.getElementById('user-stats').style.display = 'flex';
+      document.getElementById('nav-dashboard').style.display = 'inline';
+      document.getElementById('login-nav-btn').style.display = 'none';
+      document.getElementById('signup-nav-btn').style.display = 'none';
+      document.getElementById('logout-btn').style.display = 'inline';
+
+      loadUserStats();
+    }
+
+    function logoutUser() {
+      saveUserData();
+      currentUser = null;
+      document.getElementById('user-greeting').style.display = 'none';
+      document.getElementById('user-stats').style.display = 'none';
+      document.getElementById('nav-dashboard').style.display = 'none';
+      document.getElementById('login-nav-btn').style.display = 'inline';
+      document.getElementById('signup-nav-btn').style.display = 'inline';
+      document.getElementById('logout-btn').style.display = 'none';
+      showPage('welcome');
+    }
+
+    function updateUserDisplay() {
+      if (currentUser) {
+        document.getElementById('user-xp').textContent = `${userStats.totalXP} XP`;
+        document.getElementById('user-streak').textContent = `${userStats.currentStreak} 🔥`;
+      }
+    }
+
+    // Category and difficulty selection
+    function selectCategory(categoryKey) {
+      currentCategory = categoryKey;
+
+      // Update category selection UI
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('border-indigo-500', 'bg-indigo-100');
+        if (btn.dataset.category === categoryKey) {
+          btn.classList.add('border-indigo-500', 'bg-indigo-100');
+        }
+      });
+
+      // Update quiz header
+      const category = quizCategories[categoryKey];
+      document.getElementById('quiz-category-icon').textContent = category.icon;
+      document.getElementById('quiz-category-name').textContent = category.name;
+    }
+
+    function selectDifficulty(difficulty) {
+      currentDifficulty = difficulty;
+
+      // Update difficulty selection UI
+      document.querySelectorAll('.difficulty-btn').forEach(btn => {
+        btn.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+        btn.classList.add('text-gray-600');
+        if (btn.dataset.difficulty === difficulty) {
+          btn.classList.remove('text-gray-600');
+          btn.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+        }
+      });
+
+      // Update quiz info
+      const difficultyInfo = {
+        easy: { name: 'Easy', points: '1x points', multiplier: 1 },
+        medium: { name: 'Medium', points: '2x points', multiplier: 2 },
+        hard: { name: 'Hard', points: '3x points', multiplier: 3 }
+      };
+
+      const info = difficultyInfo[difficulty];
+      document.getElementById('quiz-difficulty-name').textContent = info.name;
+      document.getElementById('quiz-points-info').textContent = info.points;
+    }
+
+    // Timer functions
+    function startTimer() {
+      timeLeft = 30;
+      questionStartTime = Date.now();
+      updateTimerDisplay();
+
+      timer = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          timeUp();
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function updateTimerDisplay() {
+      document.getElementById('timer-display').textContent = timeLeft;
+      const percentage = (timeLeft / 30) * 100;
+      const timerBar = document.getElementById('timer-bar');
+
+      timerBar.style.width = `${percentage}%`;
+
+      if (timeLeft <= 10) {
+        timerBar.className = 'bg-red-500 h-2 rounded-full transition-all duration-1000 timer-warning';
+      } else if (timeLeft <= 20) {
+        timerBar.className = 'bg-yellow-500 h-2 rounded-full transition-all duration-1000';
+      } else {
+        timerBar.className = 'bg-green-500 h-2 rounded-full transition-all duration-1000';
+      }
+    }
+
+    function timeUp() {
+      // Auto-select a random wrong answer or no answer
+      if (selectedOption === null) {
+        const correctAnswer = quizData[currentQuestion].correct;
+        let wrongOptions = [0, 1, 2, 3].filter(i => i !== correctAnswer);
+        selectedOption = wrongOptions[Math.floor(Math.random() * wrongOptions.length)];
+        userAnswers[currentQuestion] = selectedOption;
+
+        // Visual feedback
+        document.querySelectorAll('.option-btn')[selectedOption].classList.add('border-red-500', 'bg-red-100');
+      }
+
+      recordQuestionTime();
+      setTimeout(() => nextQuestion(), 1000);
+    }
+
+    function recordQuestionTime() {
+      const timeSpent = Math.max(1, 30 - timeLeft);
+      questionTimes.push(timeSpent);
+    }
+
+    // Quiz functions
+    function initQuiz() {
+      quizData = quizCategories[currentCategory].questions[currentDifficulty];
+      currentQuestion = 0;
+      userAnswers = [];
+      selectedOption = null;
+      questionTimes = [];
+      currentStreak = 0;
+      maxStreak = 0;
+
+      questionCard.classList.remove('hidden');
+      resultsCard.classList.add('hidden');
+      showQuestion();
+      updateProgress();
+      startTimer();
+    }
+
+    function showQuestion() {
+      const question = quizData[currentQuestion];
+
+      document.querySelector('.bg-blue-100').textContent = `Question ${currentQuestion + 1}`;
+      document.getElementById('question-text').textContent = question.question;
+      document.getElementById('current-streak').textContent = currentStreak;
+
+      const optionsContainer = document.getElementById('options-container');
+      optionsContainer.innerHTML = '';
+
+      question.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'option-btn w-full text-left p-4 border-2 border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-all duration-200';
+        button.setAttribute('data-option', index);
+        button.innerHTML = `<span class="font-medium text-gray-700">${String.fromCharCode(65 + index)})</span> ${option}`;
+
+        if (userAnswers[currentQuestion] === index) {
+          button.classList.add('border-blue-500', 'bg-blue-100');
+          selectedOption = index;
+        }
+
+        button.addEventListener('click', () => selectOption(index));
+        optionsContainer.appendChild(button);
+      });
+
+      document.getElementById('prev-btn').disabled = currentQuestion === 0;
+      document.getElementById('next-btn').disabled = selectedOption === null;
+      document.getElementById('next-btn').textContent = currentQuestion === quizData.length - 1 ? 'Finish Quiz' : 'Next →';
+    }
+
+    function selectOption(optionIndex) {
+      if (timer === null) return; // Prevent selection after time up
+
+      selectedOption = optionIndex;
+      userAnswers[currentQuestion] = optionIndex;
+
+      document.querySelectorAll('.option-btn').forEach((btn, index) => {
+        btn.classList.remove('border-blue-500', 'bg-blue-100', 'border-green-500', 'bg-green-100', 'border-red-500', 'bg-red-100');
+        if (index === optionIndex) {
+          btn.classList.add('border-blue-500', 'bg-blue-100');
+        }
+      });
+
+      document.getElementById('next-btn').disabled = false;
+    }
+
+    function nextQuestion() {
+      stopTimer();
+      recordQuestionTime();
+
+      // Update streak
+      if (selectedOption === quizData[currentQuestion].correct) {
+        currentStreak++;
+        maxStreak = Math.max(maxStreak, currentStreak);
+      } else {
+        currentStreak = 0;
+      }
+
+      if (currentQuestion < quizData.length - 1) {
+        currentQuestion++;
+        selectedOption = userAnswers[currentQuestion] || null;
+        showQuestion();
+        updateProgress();
+        startTimer();
+      } else {
+        showResults();
+      }
+    }
+
+    function updateProgress() {
+      const progress = ((currentQuestion + 1) / quizData.length) * 100;
+      document.getElementById('progress-bar').style.width = `${progress}%`;
+      document.getElementById('progress-text').textContent = `${currentQuestion + 1} of ${quizData.length}`;
+    }
+
+    function showResults() {
+      let correctAnswers = 0;
+
+      userAnswers.forEach((answer, index) => {
+        if (answer === quizData[index].correct) {
+          correctAnswers++;
+        }
+      });
+
+      const percentage = Math.round((correctAnswers / quizData.length) * 100);
+      const avgTime = Math.round(questionTimes.reduce((a, b) => a + b, 0) / questionTimes.length);
+
+      // Calculate XP
+      const difficultyMultiplier = { easy: 1, medium: 2, hard: 3 }[currentDifficulty];
+      const baseXP = correctAnswers * 20 * difficultyMultiplier;
+      const timeBonus = Math.max(0, (30 - avgTime) * 2);
+      const streakBonus = maxStreak * 10;
+      const totalEarnedXP = baseXP + timeBonus + streakBonus;
+
+      // Update basic results
+      document.getElementById('final-score').textContent = `${correctAnswers}/${quizData.length}`;
+      document.getElementById('final-percentage').textContent = `${percentage}%`;
+      document.getElementById('correct-count').textContent = correctAnswers;
+      document.getElementById('incorrect-count').textContent = quizData.length - correctAnswers;
+      document.getElementById('final-streak').textContent = maxStreak;
+      document.getElementById('avg-time').textContent = `${avgTime}s`;
+      document.getElementById('results-category-name').textContent = quizCategories[currentCategory].name;
+      document.getElementById('results-difficulty-name').textContent = currentDifficulty;
+
+      // XP breakdown
+      document.getElementById('xp-earned').textContent = `+${totalEarnedXP} XP`;
+      document.getElementById('base-xp').textContent = baseXP;
+      document.getElementById('time-bonus-xp').textContent = timeBonus;
+
+      // Performance-based messaging and achievements
+      let emoji, message, achievementTitle, achievementDesc, achievementBg;
+
+      if (percentage === 100) {
+        emoji = '🏆';
+        message = 'Perfect Score!';
+        achievementTitle = 'Perfect Score!';
+        achievementDesc = 'You got every question right!';
+        achievementBg = 'bg-yellow-50 border-yellow-200';
+      } else if (percentage >= 80) {
+        emoji = '🎉';
+        message = 'Excellent work!';
+        achievementTitle = 'Quiz Master!';
+        achievementDesc = 'You scored above 80%';
+        achievementBg = 'bg-green-50 border-green-200';
+      } else if (percentage >= 60) {
+        emoji = '👍';
+        message = 'Good job!';
+        achievementTitle = 'Well Done!';
+        achievementDesc = 'You passed the quiz';
+        achievementBg = 'bg-blue-50 border-blue-200';
+      } else {
+        emoji = '📚';
+        message = 'Keep practicing!';
+        achievementTitle = 'Keep Learning!';
+        achievementDesc = 'Practice makes perfect';
+        achievementBg = 'bg-orange-50 border-orange-200';
+      }
+
+      document.getElementById('results-emoji').textContent = emoji;
+      document.getElementById('performance-message').textContent = message;
+      document.getElementById('achievement-title').textContent = achievementTitle;
+      document.getElementById('achievement-description').textContent = achievementDesc;
+      document.getElementById('achievement-badge').className = `${achievementBg} rounded-lg p-4 mb-6`;
+
+      // Update user stats if logged in
+      if (currentUser) {
+        updateUserStatsAfterQuiz(percentage, totalEarnedXP, correctAnswers);
+      }
+
+      // Update leaderboard
+      updateLeaderboardAfterQuiz(percentage, totalEarnedXP);
+
+      questionCard.classList.add('hidden');
+      resultsCard.classList.remove('hidden');
+    }
+
+    function updateUserStatsAfterQuiz(percentage, xpEarned, correctAnswers) {
+      userStats.totalQuizzes++;
+      userStats.bestScore = Math.max(userStats.bestScore, percentage);
+      userStats.totalXP += xpEarned;
+
+      if (percentage === 100) {
+        userStats.currentStreak++;
+      } else {
+        userStats.currentStreak = 0;
+      }
+
+      // Add to quiz history
+      userStats.quizHistory.unshift({
+        date: new Date().toLocaleDateString(),
+        category: quizCategories[currentCategory].name,
+        difficulty: currentDifficulty,
+        score: percentage,
+        xp: xpEarned
+      });
+
+      // Update category stats
+      const categoryKey = `${currentCategory}_${currentDifficulty}`;
+      if (!userStats.categoryStats[categoryKey]) {
+        userStats.categoryStats[categoryKey] = { attempts: 0, bestScore: 0, totalXP: 0 };
+      }
+      userStats.categoryStats[categoryKey].attempts++;
+      userStats.categoryStats[categoryKey].bestScore = Math.max(userStats.categoryStats[categoryKey].bestScore, percentage);
+      userStats.categoryStats[categoryKey].totalXP += xpEarned;
+
+      // Add achievements
+      if (percentage === 100 && !userStats.achievements.includes('Perfect Score')) {
+        userStats.achievements.push('Perfect Score');
+      }
+      if (userStats.totalQuizzes >= 10 && !userStats.achievements.includes('Quiz Veteran')) {
+        userStats.achievements.push('Quiz Veteran');
+      }
+      if (userStats.totalXP >= 1000 && !userStats.achievements.includes('XP Master')) {
+        userStats.achievements.push('XP Master');
+      }
+
+      updateUserDisplay();
+      saveUserData();
+    }
+
+    function updateLeaderboardAfterQuiz(percentage, xpEarned) {
+      if (currentUser) {
+        const existingEntry = leaderboard.find(entry => entry.email === currentUser.email);
+        if (existingEntry) {
+          existingEntry.totalXP += xpEarned;
+          existingEntry.quizzesTaken++;
+          existingEntry.bestScore = Math.max(existingEntry.bestScore, percentage);
+        } else {
+          leaderboard.push({
+            name: currentUser.name,
+            email: currentUser.email,
+            totalXP: xpEarned,
+            quizzesTaken: 1,
+            bestScore: percentage
+          });
+        }
+
+        // Sort leaderboard by total XP
+        leaderboard.sort((a, b) => b.totalXP - a.totalXP);
+        saveUserData();
+      }
+    }
+
+    function displayLeaderboard() {
+      const leaderboardList = document.getElementById('leaderboard-list');
+      leaderboardList.innerHTML = '';
+
+      if (leaderboard.length === 0) {
+        leaderboardList.innerHTML = '<div class="text-center text-gray-500 py-8">No players yet. Be the first to take a quiz!</div>';
+        return;
+      }
+
+      leaderboard.slice(0, 10).forEach((player, index) => {
+        const isCurrentUser = currentUser && player.email === currentUser.email;
+        const entry = document.createElement('div');
+        entry.className = `flex items-center justify-between p-4 rounded-lg ${isCurrentUser ? 'bg-indigo-50 border-2 border-indigo-200' : 'bg-gray-50'}`;
+
+        const rankEmoji = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `#${index + 1}`;
+
+        entry.innerHTML = `
+                    <div class="flex items-center">
+                        <span class="text-2xl mr-4">${rankEmoji}</span>
+                        <div>
+                            <div class="font-bold text-gray-800">${player.name} ${isCurrentUser ? '(You)' : ''}</div>
+                            <div class="text-sm text-gray-600">${player.quizzesTaken} quizzes • Best: ${player.bestScore}%</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-bold text-yellow-600">${player.totalXP} XP</div>
+                    </div>
+                `;
+
+        leaderboardList.appendChild(entry);
+      });
+    }
+
+    function displayDashboard() {
+      // Update stats
+      document.getElementById('dashboard-xp').textContent = userStats.totalXP;
+      document.getElementById('dashboard-streak').textContent = `${userStats.currentStreak} 🔥`;
+      document.getElementById('dashboard-quizzes').textContent = userStats.totalQuizzes;
+      document.getElementById('dashboard-best').textContent = `${userStats.bestScore}%`;
+
+      // Update achievements
+      const achievementsContainer = document.getElementById('recent-achievements');
+      if (userStats.achievements.length === 0) {
+        achievementsContainer.innerHTML = '<div class="text-gray-500 text-sm">No achievements yet</div>';
+      } else {
+        achievementsContainer.innerHTML = userStats.achievements.slice(-3).map(achievement =>
+          `<div class="flex items-center text-sm">
+                        <span class="text-yellow-500 mr-2">🏆</span>
+                        <span>${achievement}</span>
+                    </div>`
+        ).join('');
+      }
+
+      // Update category performance
+      const categoryPerformance = document.getElementById('category-performance');
+      const categories = Object.keys(userStats.categoryStats);
+      if (categories.length === 0) {
+        categoryPerformance.innerHTML = '<div class="text-gray-500 text-sm">No quiz data yet</div>';
+      } else {
+        categoryPerformance.innerHTML = categories.map(categoryKey => {
+          const stats = userStats.categoryStats[categoryKey];
+          const [category, difficulty] = categoryKey.split('_');
+          const categoryName = quizCategories[category].name;
+          return `
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="font-medium">${categoryName}</div>
+                                <div class="text-xs text-gray-600">${difficulty} • ${stats.attempts} attempts</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-green-600">${stats.bestScore}%</div>
+                                <div class="text-xs text-yellow-600">${stats.totalXP} XP</div>
+                            </div>
+                        </div>
+                    `;
+        }).join('');
+      }
+
+      // Update quiz history
+      const quizHistory = document.getElementById('quiz-history');
+      if (userStats.quizHistory.length === 0) {
+        quizHistory.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-gray-500">No quiz history yet</td></tr>';
+      } else {
+        quizHistory.innerHTML = userStats.quizHistory.slice(0, 10).map(quiz => `
+                    <tr class="border-b">
+                        <td class="py-2">${quiz.date}</td>
+                        <td class="py-2">${quiz.category}</td>
+                        <td class="py-2 capitalize">${quiz.difficulty}</td>
+                        <td class="py-2">${quiz.score}%</td>
+                        <td class="py-2">+${quiz.xp}</td>
+                    </tr>
+                `).join('');
+      }
+    }
+
+    function updateLeaderboard() {
+      // This would typically fetch from a server
+      // For demo purposes, we'll use local storage
+    }
+
+    function updateTotalPlayers() {
+      document.getElementById('total-players').textContent = leaderboard.length;
+    }
+
+    // Event listeners
+    document.getElementById('nav-home').addEventListener('click', () => showPage('welcome'));
+    document.getElementById('nav-leaderboard').addEventListener('click', () => showPage('leaderboard'));
+    document.getElementById('nav-dashboard').addEventListener('click', () => showPage('dashboard'));
+    document.getElementById('login-nav-btn').addEventListener('click', () => showPage('login'));
+    document.getElementById('signup-nav-btn').addEventListener('click', () => showPage('signup'));
+    document.getElementById('welcome-login-btn').addEventListener('click', () => showPage('login'));
+    document.getElementById('welcome-signup-btn').addEventListener('click', () => showPage('signup'));
+    document.getElementById('start-quiz-guest').addEventListener('click', () => showPage('quiz'));
+    document.getElementById('switch-to-signup').addEventListener('click', () => showPage('signup'));
+    document.getElementById('switch-to-login').addEventListener('click', () => showPage('login'));
+    document.getElementById('back-to-welcome-from-login').addEventListener('click', () => showPage('welcome'));
+    document.getElementById('back-to-welcome-from-signup').addEventListener('click', () => showPage('welcome'));
+    document.getElementById('logout-btn').addEventListener('click', logoutUser);
+    document.getElementById('back-to-home').addEventListener('click', () => showPage('welcome'));
+    document.getElementById('back-to-home-from-leaderboard').addEventListener('click', () => showPage('welcome'));
+    document.getElementById('back-to-home-from-dashboard').addEventListener('click', () => showPage('welcome'));
+    document.getElementById('restart-btn').addEventListener('click', initQuiz);
+    document.getElementById('try-different-category').addEventListener('click', () => showPage('welcome'));
+    document.getElementById('view-leaderboard').addEventListener('click', () => showPage('leaderboard'));
+
+    // Category and difficulty selection listeners
+    document.querySelectorAll('.category-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectCategory(btn.dataset.category);
+      });
+    });
+
+    document.querySelectorAll('.difficulty-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectDifficulty(btn.dataset.difficulty);
+      });
+    });
+
+    // Form submissions
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const name = email.split('@')[0];
+      loginUser(email, name);
+      showPage('welcome');
+    });
+
+    document.getElementById('signup-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const firstName = document.getElementById('first-name').value;
+      const lastName = document.getElementById('last-name').value;
+      const email = document.getElementById('signup-email').value;
+      const fullName = `${firstName} ${lastName}`;
+      loginUser(email, fullName);
+      showPage('welcome');
+    });
+
+    // Quiz navigation
+    document.getElementById('next-btn').addEventListener('click', nextQuestion);
+
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      if (currentQuestion > 0) {
+        stopTimer();
+        currentQuestion--;
+        selectedOption = userAnswers[currentQuestion] || null;
+        showQuestion();
+        updateProgress();
+        startTimer();
+      }
+    });
+
+    // Initialize the application
+    initApp();
+  </script>
+  <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'97025802e1b0fd87',t:'MTc1NTM2MjExNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
 </body>
 
 </html>
